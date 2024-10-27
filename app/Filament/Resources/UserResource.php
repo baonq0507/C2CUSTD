@@ -21,6 +21,7 @@ use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Pages\Page;
+use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Pages\CreateRecord;
 
 class UserResource extends Resource
@@ -70,6 +71,8 @@ class UserResource extends Resource
                     TextInput::make('bank_name')->label('Tên ngân hàng'),
                     TextInput::make('bank_account')->label('Số tài khoản'),
                     TextInput::make('bank_owner')->label('Chủ tài khoản'),
+                    FileUpload::make('cccd_before')->label('Ảnh chứng minh trước')->image()->previewable()->downloadable()->openable(true),
+                    FileUpload::make('cccd_after')->label('Ảnh chứng minh sau')->image()->previewable()->downloadable()->openable(true),
                     Toggle::make('accept_info')->label('Duyệt thông tin'),
                 ])->columns(2)
                 ->hidden(fn(User $user) => is_null($user->id)),
