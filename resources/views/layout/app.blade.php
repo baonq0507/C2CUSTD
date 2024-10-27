@@ -8,6 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="{{ asset('images/logo.jpg') }}" type="image/x-icon">
+    <meta name="description" content="{{ env('APP_DESCRIPTION', 'Laravel') }}">
+    <!-- meta image -->
+    <meta name="image" content="{{ asset('images/logo.jpg') }}">
+    <meta property="og:title" content="{{ env('APP_NAME', 'Laravel') }}">
+    <meta property="og:description" content="{{ env('APP_DESCRIPTION', 'Laravel') }}">
+    <meta property="og:image" content="{{ asset('images/logo.jpg') }}">
+    <meta property="og:image:width" content="1200"> <!-- Kích thước hình ảnh -->
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
     @yield('css')
 </head>
 
