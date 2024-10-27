@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DepositUstdSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }
