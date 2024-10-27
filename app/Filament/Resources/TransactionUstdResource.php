@@ -23,7 +23,7 @@ class TransactionUstdResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return Transaction::whereIn('type', ['sell_usdt', 'buy_usdt'])->where('status', 'pending')->count();
+        return parent::getEloquentQuery()->whereIn('type', ['sell_usdt', 'buy_usdt'])->where('status', 'pending')->count();
     }
     public static function getEloquentQuery(): Builder
     {

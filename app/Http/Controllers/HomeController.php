@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Hash;
 use App\Models\DepositUstd;
 use App\Models\Setting;
+use App\Models\SellUstd;
 class HomeController extends Controller
 {
     public function index()
@@ -146,8 +147,8 @@ class HomeController extends Controller
         Transaction::create([
             'user_id' => $user->id,
             'amount' => $amount,
-            'type' => 'sell_usdt',
-            'status' => 'pending',
+            'type' => 'buy_usdt',
+            'status' => 'approved',
         ]);
         return response()->json(['message' => 'Bán thành công']);
     }
@@ -174,6 +175,12 @@ class HomeController extends Controller
             'user_id' => $user->id,
             'amount' => $amount,
             'type' => 'sell_usdt',
+            'status' => 'approved',
+        ]);
+
+        SellUstd::create([
+            'user_id' => $user->id,
+            'amount' => $amount,
             'status' => 'approved',
         ]);
         return response()->json(['message' => 'Bán thành công']);

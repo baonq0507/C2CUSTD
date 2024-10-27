@@ -8,13 +8,8 @@ class SellUstd extends Model
 {
     protected $fillable = [
         'user_id',
-        'price',
         'amount',
-        'remaining',
-        'limit',
-        'limit_max',
         'status',
-        'transaction_count'
     ];
 
     public function user()
