@@ -118,18 +118,18 @@
             <div class="row text-center">
                 <div class="col-4">
                     <h6 class="text-white f-14 mb-1">BTC/</h6>
-                    <h6 class="text-warning f-14 mb-1">100,000</h6>
-                    <h6 class="text-red f-14 mb-1">-1.2%</h6>
+                    <h6 class="text-warning f-14 mb-1" id="btc-price">100,000</h6>
+                    <h6 class="text-red f-14 mb-1" id="btc-profit">-1.2%</h6>
                 </div>
                 <div class="col-4">
-                    <h6 class="text-white f-14 mb-1">BTC/</h6>
-                    <h6 class="text-warning f-14 mb-1">100,000</h6>
-                    <h6 class="text-red f-14 mb-1">-1.2%</h6>
+                    <h6 class="text-white f-14 mb-1">ETH/</h6>
+                    <h6 class="text-warning f-14 mb-1" id="eth-price">100,000</h6>
+                    <h6 class="text-red f-14 mb-1" id="eth-profit">-1.2%</h6>
                 </div>
                 <div class="col-4">
-                    <h6 class="text-white f-14 mb-1">BTC/</h6>
-                    <h6 class="text-warning f-14 mb-1">100,000</h6>
-                    <h6 class="text-red f-14 mb-1">-1.2%</h6>
+                    <h6 class="text-white f-14 mb-1">USDT/</h6>
+                    <h6 class="text-warning f-14 mb-1" id="usdt-price">100,000</h6>
+                    <h6 class="text-red f-14 mb-1" id="usdt-profit">-1.2%</h6>
                 </div>
             </div>
         </div>
@@ -334,29 +334,48 @@
 @section('js')
 <script>
     $(document).ready(function() {
-        function getPrice(element) {
-            var symbol = $(element).data('symbol');
-            console.log(symbol);
-            var url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m&limit=100`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    const profit = data.reduce((sum, item) => {
-                        const startPrice = parseFloat(item[1]);
-                        const endPrice = parseFloat(item[4]);
-                        const percentChange = Math.abs((endPrice - startPrice) / startPrice * 100);
-                        return sum + percentChange;
-                    }, 0) / data.length;
-                    const lastPrice = parseFloat(data[data.length - 1][4]);
-                    $(element).find('.price').text(`${lastPrice}`);
-                    $(element).find('.profit').text(`${profit.toFixed(2)}%`);
+                function getPrice(element) {
+                    var symbol = $(element).data('symbol');
+                    console.log(symbol);
+                    var url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1m&limit=100`;
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                                const profit = data.reduce((sum, item) => {
+                                    const startPrice = parseFloat(item[1]);
+                                    const endPrice = parseFloat(item[4]);
+                                    const percentChange = Math.abs((endPrice - startPrice) / startPrice * 100);
+                                    return sum + percentChange;
+                                }, 0) / data.length;
+                                const lastPrice = parseFloat(data[data.length - 1][4]);
+                                $(element).find('.price').text(`${lastPrice}`);
+                                $(element).find('.profit').text(`${profit.toFixed(2)}%`);
+                                $(element).find('.profit').toggleClass('text-white', profit < 0);
+                                $(element).find('.profit').toggleClass('text-green', profit > 0);
+                                if (symbol.includes('BTC')) {
+                                    $('#btc-price').text(`${lastPrice}`);
+                                        $('#btc-profit').text(`${profit.toFixed(2)}%`);
+                                        $('#btc-profit').toggleClass('text-red', profit < 0);
+                                        $('#btc-profit').toggleClass('text-green', profit > 0);
+                                    }
+                                    if (symbol.includes('ETH')) {
+                                        $('#eth-price').text(`${lastPrice}`);
+                                        $('#eth-profit').text(`${profit.toFixed(2)}%`);
+                                        $('#eth-profit').toggleClass('text-red', profit < 0);
+                                        $('#eth-profit').toggleClass('text-green', profit > 0);
+                                    }
+                                    if (symbol.includes('USDT')) {
+                                        $('#usdt-price').text(`${lastPrice}`);
+                                        $('#usdt-profit').text(`${profit.toFixed(2)}%`);
+                                        $('#usdt-profit').toggleClass('text-red', profit < 0);
+                                        $('#usdt-profit').toggleClass('text-green', profit > 0);
+                                    }
+                                });
+                        }
+                    const symbols = $('.symbol');
+                    symbols.each(function() {
+                        getPrice($(this));
+                    });
                 });
-        }
-        const symbols = $('.symbol');
-        symbols.each(function() {
-            getPrice($(this));
-        });
-    });
 </script>
 @endsection

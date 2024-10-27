@@ -69,3 +69,6 @@ input.small {
 .border-bottom{
     border-bottom: 1px solid #979797 !important;
 }
+.text-green{
+    color: #00ff00;
+}
