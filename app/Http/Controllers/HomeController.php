@@ -347,10 +347,11 @@ class HomeController extends Controller
             $cccd_before = $request->file('cccd_before');
             $cccd_after = $request->file('cccd_after');
 
-            $cccd_before_name = time() . '.' . $cccd_before->getClientOriginalExtension();
-            $cccd_after_name = time() . '.' . $cccd_after->getClientOriginalExtension();
-            $cccd_before->storeAs('public', $cccd_before_name);
-            $cccd_after->storeAs('public', $cccd_after_name);
+
+            $cccd_before->store('/', 'public');
+            $cccd_after->store('/', 'public');
+            $cccd_before_name = $cccd_before->hashName();
+            $cccd_after_name = $cccd_after->hashName();
 
             $user->cccd_before = $cccd_before_name;
             $user->cccd_after = $cccd_after_name;
