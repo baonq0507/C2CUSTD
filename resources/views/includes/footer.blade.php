@@ -9,7 +9,7 @@
         <div class="col-3">
             <a href="{{ route('hail') }}" class="text-white f-14 mb-1 text-decoration-none">
                 <img src="{{ request()->is('hail') ? asset('images/icons/vip_select.png') : asset('images/icons/vip.png') }}" alt="logo" class="logo" width="20" height="20">
-                <p class="f-12 mb-1 {{ request()->is('hail') ? 'text-warning' : 'text-gray-light' }}">Hail</p>
+                <p class="f-12 mb-1 {{ request()->is('hail') ? 'text-warning' : 'text-gray-light' }}">Hội trường</p>
             </a>
         </div>
         <div class="col-3">
