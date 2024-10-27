@@ -9,6 +9,12 @@
 
     <div class="card mb-3">
         <div class="card-body">
+            <img src="{{ asset('images/icons/banner.png') }}" alt="logo" class="w-100">
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
             <div class="row">
                 <div class="col-6 text-center">
                     <a href="{{ route('noviciate') }}" class="text-white f-14 mb-1 text-decoration-none">

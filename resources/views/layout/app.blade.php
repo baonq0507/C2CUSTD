@@ -15,7 +15,7 @@
     <meta property="og:title" content="{{ env('APP_NAME', 'Laravel') }}">
     <meta property="og:description" content="{{ env('APP_DESCRIPTION', 'Laravel') }}">
     <meta property="og:image" content="{{ asset('images/logo.jpg') }}">
-    <meta property="og:image:width" content="1200"> <!-- Kích thước hình ảnh -->
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:type" content="website">
     @yield('css')
