@@ -25,8 +25,11 @@
 <div class="container mt-3">
     <div class="card mb-3">
         <div class="card-body text-center">
-            <img src="{{ asset('images/icons/level1.png') }}" alt="logo" class="logo">
+            <img src="{{ asset('images/icons/level' . auth()->user()->level . '.png') }}" alt="logo" class="logo">
+            <span class="badge bg-{{ auth()->user()->level == 1 ? 'warning' : (auth()->user()->level == 2 ? 'success' : (auth()->user()->level == 3 ? 'danger' : (auth()->user()->level == 4 ? 'info' : 'primary'))) }}">{{ auth()->user()->level == 1 ? 'Hạng thường' : (auth()->user()->level == 2 ? 'Hạng thương gia' : (auth()->user()->level == 3 ? 'Hạng vàng' : (auth()->user()->level == 4 ? 'Hạng bạc' : 'Hạng kim cương'))) }}</span>
+            @if (auth()->user()->level == 1)
             <a id="upgrade" class="f-14 text-warning">Nâng cấp thương gia</a>
+            @endif
             <p class="f-14 text-white">Số dư USDT: {{ number_format(auth()->user()->usdt_balance, 0, ',', '.') }}</p>
 
             <div class="row">

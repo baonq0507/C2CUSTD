@@ -54,6 +54,14 @@ class UserResource extends Resource
                     TextInput::make('referral_code')->label('Mã giới thiệu')->required(),
                     TextInput::make('total_withdraw')->label('Tổng rút tiền')->visible(fn(User $user) => !is_null($user->id)),
                     TextInput::make('total_deposit')->label('Tổng nạp tiền')->visible(fn(User $user) => !is_null($user->id)),
+                    //level
+                    Select::make('level')->options([
+                        1 => 'Hạng thường',
+                        2 => 'Hạng thương gia',
+                        3 => 'Hạng vàng',
+                        4 => 'Hạng bạc',
+                        5 => 'Hạng kim cương',
+                    ])->label('Level'),
                 ])->columns(2),
 
                 Section::make('Thông tin liên hệ')
@@ -82,6 +90,14 @@ class UserResource extends Resource
                 //balance
                 TextColumn::make('balance')->label('Số dư')->money('VND'),
                 TextColumn::make('usdt_balance')->label('Số dư USDT')->formatStateUsing(fn ($state) => number_format($state, 2, ',', '.')),
+                //level
+                TextColumn::make('level')->label('Level')->formatStateUsing(fn ($state) => $state == 1 ? 'Hạng thường' : ($state == 2 ? 'Hạng thương gia' : ($state == 3 ? 'Hạng vàng' : ($state == 4 ? 'Hạng bạc' : 'Hạng kim cương'))))->badge()->color(fn ($state) => match ($state) {
+                    1 => 'warning',
+                    2 => 'success',
+                    3 => 'danger',
+                    4 => 'info',
+                    5 => 'primary',
+                }),
                 TextColumn::make('created_at')->label('Ngày tạo')->dateTime('d/m/Y H:i:s'),
             ])
             ->filters([
