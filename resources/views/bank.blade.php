@@ -137,6 +137,8 @@
             const formData = new FormData(this);
             formData.append('cccd_before', $('#cccd_before').val());
             formData.append('cccd_after', $('#cccd_after').val());
+            $(this).find('button').prop('disabled', true);
+            $(this).find('button').html('<i class="fas fa-spinner fa-spin"></i> Đang gửi...');
 
             $.ajax({
                 url: $(this).attr('action'),
@@ -152,7 +154,7 @@
                         timer: 1500
                     });
                     setTimeout(function() {
-                        window.location.href = "/user";
+                        window.location.href = "/withdraw";
                     }, 1500);
                 },
                 error: function(response) {
@@ -160,6 +162,8 @@
                         icon: 'error',
                         title: 'Gửi yêu cầu thất bại',
                     });
+                    $(this).find('button').prop('disabled', false);
+                    $(this).find('button').html('Gửi yêu cầu');
                 }
             });
         });
