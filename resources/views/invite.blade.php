@@ -18,10 +18,20 @@
     <div class="content">
         <div class="mask text-center">
             <p class="text-white  f-14 mb-0">Mã mời của tôi</p>
-            <p class="text-white mt-3 f-14 mb-0">{{ auth()->user()->referral_code }}</p>
+            @if(auth()->user()->level >= 3)
+            <p class="text-white mt-3 f-14 mb-0">
+                {{ auth()->user()->referral_code }}
+            </p>
 
             <button class="btn btn-warning mt-2" onclick="copyText('{{ auth()->user()->referral_code }}')">Sao chép</button>
             <p class="text-white mt-2 f-14">Sao chép mã mời và chia sẻ cho bạn bè</p>
+            @else
+            <p class="text-white mt-3 f-14 mb-0 text-center">
+                Bạn cần đạt hạng vàng để xem mã mời
+            </p>
+            <a href="{{ route('cskh') }}" class="text-warning">Nâng hạng ngay</a>
+
+            @endif
         </div>
     </div>
 </div>

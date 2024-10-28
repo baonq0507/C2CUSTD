@@ -51,7 +51,7 @@ class AuthController extends Controller
             'referral_code' => $referral_code,
             'referral_by' => $referral_by,
         ]);
-        return redirect()->route('login')->with('success', 'Đăng ký thành công, mã giới thiệu của bạn là: ' . $referral_code);
+        return redirect()->route('login')->with('success', 'Đăng ký thành công, vui lòng đăng nhập');
     }
 
     public function postLogin(Request $request)
