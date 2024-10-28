@@ -41,6 +41,7 @@ class User extends Authenticatable implements FilamentUser
         'total_withdraw',
         'total_deposit',
         'level',
+        'min_withdraw',
         'accept_info',
         'status',
     ];

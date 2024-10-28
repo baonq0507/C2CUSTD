@@ -55,6 +55,8 @@ class UserResource extends Resource
                     TextInput::make('referral_code')->label('Mã giới thiệu')->required(),
                     TextInput::make('total_withdraw')->label('Tổng rút tiền')->visible(fn(User $user) => !is_null($user->id)),
                     TextInput::make('total_deposit')->label('Tổng nạp tiền')->visible(fn(User $user) => !is_null($user->id)),
+                    //min_withdraw
+                    TextInput::make('min_withdraw')->label('Giới hạn rút tiền'),
                     //level
                     Select::make('level')->options([
                         1 => 'Hạng thường',

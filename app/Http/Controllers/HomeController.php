@@ -384,6 +384,9 @@ class HomeController extends Controller
         if($user->balance < $request->amount) {
             return back()->with('error', 'Số tiền VNĐ không đủ');
         }
+        if($user->min_withdraw > $request->amount) {
+            return back()->with('error', 'Số tiền rút tối thiểu là ' . number_format($user->min_withdraw, 0, ',', '.'));
+        }
         $user->balance -= $request->amount;
         $user->save();
         Transaction::create([
