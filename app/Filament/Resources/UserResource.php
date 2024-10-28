@@ -133,6 +133,28 @@ class UserResource extends Resource
                         $record->save();
                         Notification::make()->title('Cộng số dư USDT thành công')->success()->send();
                     }),
+                    //sub_balance
+                    Tables\Actions\Action::make('sub_balance')->label('Trừ số dư VNĐ')
+                    ->icon('heroicon-o-minus')
+                    ->form([
+                        Forms\Components\TextInput::make('sub_balance')->label('Số dư VNĐ')
+                    ])->modalWidth('sm')->modalHeading('Trừ số dư VNĐ')
+                    ->action(function ($data, $record) {
+                        $record->balance -= $data['sub_balance'];
+                        $record->save();
+                        Notification::make()->title('Trừ số dư VNĐ thành công')->success()->send();
+                    }),
+                    //sub_usdt_balance
+                    Tables\Actions\Action::make('sub_usdt_balance')->label('Trừ số dư USDT')
+                    ->icon('heroicon-o-minus')
+                    ->form([
+                        Forms\Components\TextInput::make('sub_usdt_balance')->label('Số dư USDT')
+                    ])->modalWidth('sm')->modalHeading('Trừ số dư USDT')
+                    ->action(function ($data, $record) {
+                        $record->usdt_balance -= $data['sub_usdt_balance'];
+                        $record->save();
+                        Notification::make()->title('Trừ số dư USDT thành công')->success()->send();
+                    }),
                 ]),
             ])
             ->bulkActions([
