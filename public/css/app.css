@@ -72,3 +72,15 @@ input.small {
 .text-green{
     color: #00ff00;
 }
+#gifbox{
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    animation: gifbox 1s infinite;
+}
+@keyframes gifbox {
+    0% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-50%) scale(1.2); }
+    100% { transform: translateY(-50%) scale(1); }
+}

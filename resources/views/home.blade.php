@@ -310,6 +310,7 @@
             </div>
         </div>
     </div>
+
     <div class="card mb-5 symbol" style="margin-bottom: 70px !important;" data-symbol="ETCUSDT">
         <div class="card-body">
             <div class="row">
@@ -332,6 +333,13 @@
             <img src="{{ asset('images/icons/customer.png') }}" alt="logo" class="logo" width="60" height="60">
         </a>
     </div>
+    @if($gifbox)
+    <div class="gifbox" id="gifbox" data-amount="{{ $gifbox->amount }}" data-name="{{ $gifbox->name }}" data-id="{{ $gifbox->id }}">
+        <img src="{{ asset('images/icons/gifbox.png') }}" alt="logo" class="logo" width="50" height="50">
+    </div>
+    @endif
+    <!-- modal gifbox -->
+
     @include('includes.footer')
 
 </div>
@@ -389,6 +397,33 @@
                 getPrice($(this));
             });
         }, 3000);
+
+        $('#gifbox').click(function() {
+            var amount = $(this).data('amount');
+            var name = $(this).data('name');
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('buyGifbox') }}",
+                type: "POST",
+                data: { id: id, _token: "{{ csrf_token() }}" },
+                success: function(response) {
+                    Swal.fire({
+                        title: 'Thành công',
+                        text: response.message,
+                        icon: 'success'
+                    });
+
+                    $('#gifbox').remove();
+                },
+                error: function(response) {
+                    Swal.fire({
+                        title: 'Thất bại',
+                        text: response.message,
+                        icon: 'error'
+                    });
+                }
+            });
+        });
     });
 </script>
 @endsection

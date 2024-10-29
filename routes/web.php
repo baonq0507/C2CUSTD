@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/withdraw', [HomeController::class, 'withdraw'])->name('withdraw');
     Route::post('/withdraw', [HomeController::class, 'postWithdraw'])->name('postWithdraw');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/buy_gifbox', [HomeController::class, 'buyGifbox'])->name('buyGifbox');
 });
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');

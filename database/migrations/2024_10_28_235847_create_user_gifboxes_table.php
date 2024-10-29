@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gifboxes', function (Blueprint $table) {
+        Schema::create('user_gifboxes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->bigInteger('amount')->default(0);
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('gifbox_id')->constrained('gifboxes')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gifboxes');
+        Schema::dropIfExists('user_gifboxes');
     }
 };

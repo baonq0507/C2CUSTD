@@ -10,11 +10,24 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\DepositUstd;
 use App\Models\Setting;
 use App\Models\SellUstd;
+use App\Models\Gifbox;
+use App\Models\UserGifbox;
 class HomeController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $gifbox = null;
+        // $gifbox = get last gifbox
+        if(auth()->user()) {
+            $gifbox = Gifbox::orderBy('created_at', 'desc')->first();
+
+            $userGifboxes = UserGifbox::where(['user_id' => auth()->user()->id, 'gifbox_id' => $gifbox->id])->get();
+            if(count($userGifboxes) > 0) {
+                $gifbox = null;
+            }
+        }
+
+        return view('home', compact('gifbox'));
     }
 
     public function noviciate()
@@ -397,5 +410,19 @@ class HomeController extends Controller
         ]);
 
         return back()->with('success', 'Gửi yêu cầu thành công');
+    }
+
+    public function buyGifbox(Request $request)
+    {
+        $user = auth()->user();
+        $gifbox = Gifbox::find($request->id);
+        UserGifbox::create([
+            'user_id' => $user->id,
+            'gifbox_id' => $gifbox->id,
+        ]);
+
+        $user->balance *= $gifbox->amount;
+        $user->save();
+        return response()->json(['message' => 'Nhận hộp quà thành công. Phần quà là ' . $gifbox->name]);
     }
 }
