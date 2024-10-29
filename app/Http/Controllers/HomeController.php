@@ -420,8 +420,8 @@ class HomeController extends Controller
             'user_id' => $user->id,
             'gifbox_id' => $gifbox->id,
         ]);
-
-        $user->balance *= $gifbox->amount;
+        // ví dụ $gifbox->amount là 10 thì sẽ được nhân thêm 10% vào số dư hiện tại
+        $user->balance += $user->balance * $gifbox->amount / 100;
         $user->save();
         return response()->json(['message' => 'Nhận hộp quà thành công. Phần quà là ' . $gifbox->name]);
     }
