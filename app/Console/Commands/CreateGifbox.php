@@ -31,7 +31,7 @@ class CreateGifbox extends Command
         ];
         $randomAmount = $amount[array_rand($amount)];
         Gifbox::create([
-            'name' => 'X' . $randomAmount . '%' . ' Số dư hiện tại',
+            'name' => 'X' . $randomAmount . '%',
             'amount' => $randomAmount
         ]);
     }
